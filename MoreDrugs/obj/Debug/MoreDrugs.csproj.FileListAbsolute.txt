@@ -1,0 +1,6 @@
+C:\Users\kaide\Desktop\MoreDrugs\MoreDrugs\bin\Debug\MoreDrugs.dll
+C:\Users\kaide\Desktop\MoreDrugs\MoreDrugs\bin\Debug\MoreDrugs.pdb
+C:\Users\kaide\Desktop\MoreDrugs\MoreDrugs\obj\Debug\MoreDrugs.csproj.AssemblyReference.cache
+C:\Users\kaide\Desktop\MoreDrugs\MoreDrugs\obj\Debug\MoreDrugs.csproj.CoreCompileInputs.cache
+C:\Users\kaide\Desktop\MoreDrugs\MoreDrugs\obj\Debug\MoreDrugs.dll
+C:\Users\kaide\Desktop\MoreDrugs\MoreDrugs\obj\Debug\MoreDrugs.pdb
