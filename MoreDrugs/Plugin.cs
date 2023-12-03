@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using MoreDrugs.Models;
@@ -11,6 +12,11 @@ using LethalLib;
 using LC_API.ServerAPI;
 using LethalLib.Modules;
 using System.Resources;
+using UnityEngine.Events;
+using System.Reflection;
+using System.Text;
+using System.IO;
+using System;
 
 namespace MoreDrugs
 {
@@ -29,25 +35,38 @@ namespace MoreDrugs
 
         void Awake()
         {
-            if (Instance == null)
+            try
             {
-                Instance = this;
+                if (Instance == null)
+                {
+                    Instance = this;
+                }
+
+                mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
+                mls.LogInfo("The test mod has awakened.");
+
+                harmony.PatchAll(typeof(TestModBase));
+                harmony.PatchAll(typeof(PlayerControllerBPatch));
+                harmony.PatchAll(typeof(AddMoneyPatch));
+                harmony.PatchAll(typeof(InfiniteDrugPatch));
+                mls.LogInfo("Hello i am alive still");
+                var obj = GameObject.FindObjectOfType(typeof(TetraChemicalItem));
+                if (obj != null)
+                    mls.LogInfo("Found TetraChemicalItem: " + obj.ToString());
+                else
+                    mls.LogInfo("Could not find TetraChemicalItem.");
+                Item myItem = ScriptableObject.CreateInstance<Item>();
+                myItem.itemName = "TestDrug";
+                myItem.itemId = 0987654321;
+                myItem.spawnPrefab = (GameObject)obj;
+                myItem.spawnPrefab.AddComponent<TestDrug>();
+                LethalLib.Modules.Items.RegisterShopItem(myItem, 999);
+                LethalLib.Modules.NetworkPrefabs.RegisterNetworkPrefab(myItem.spawnPrefab);
             }
-
-            mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-            mls.LogInfo("The test mod has awakened.");
-
-            harmony.PatchAll(typeof(TestModBase));
-            harmony.PatchAll(typeof(PlayerControllerBPatch));
-            harmony.PatchAll(typeof(AddMoneyPatch));
-            harmony.PatchAll(typeof(InfiniteDrugPatch));
-
-            Item myItem = new Item();
-            myItem.name = "TestDrug";
-            myItem.spawnPrefab = Resources.Load<GameObject>("tzpPrefab");
-            TestDrug testDrug = myItem.spawnPrefab.AddComponent<TestDrug>();
-            LethalLib.Modules.Items.RegisterShopItem(myItem, 0);
-            LethalLib.Modules.NetworkPrefabs.RegisterNetworkPrefab(myItem.spawnPrefab);
+            catch (Exception ex)
+            {
+                mls.LogError(ex.Message);
+            }
         }
     }
 }
