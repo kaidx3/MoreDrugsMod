@@ -34,6 +34,7 @@ namespace MoreDrugs.Models
         public AudioClip outOfGasSFX;
 
         private bool triedUsingWithoutFuel;
+        private readonly System.Type __instance;
 
         public override void ItemActivate(bool used, bool buttonDown = true)
         {
@@ -118,12 +119,16 @@ namespace MoreDrugs.Models
 
                 previousPlayerHeldBy.drunknessInertia = Mathf.Clamp(previousPlayerHeldBy.drunknessInertia + Time.deltaTime / 1.75f * previousPlayerHeldBy.drunknessSpeed, 0.1f, 3f);
                 previousPlayerHeldBy.increasingDrunknessThisFrame = true;
+            }
 
+            float drunkness = Traverse.Create(playerHeldBy).Field("drunkness").GetValue<float>();
+            if (drunkness > 0f)
+            {
                 bool isSprinting = Traverse.Create(playerHeldBy).Field("isSprinting").GetValue<bool>();
                 playerHeldBy.health = 100;
                 playerHeldBy.jumpForce = 30;
                 if (isSprinting)
-                {                
+                {
                     Traverse.Create(playerHeldBy).Field("sprintMultiplier").SetValue(30f);
                 }
             }
