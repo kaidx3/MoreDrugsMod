@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿using System.Collections;
 using GameNetcodeStuff;
+using HarmonyLib;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -112,7 +108,7 @@ namespace MoreDrugs.Models
         {
             if (emittingGas)
             {
-                if (previousPlayerHeldBy == null || !isHeld || fuel <= 0f)
+                if (previousPlayerHeldBy == null || !isHeld)
                 {
                     emittingGas = false;
                     thisAudioSource.Stop();
@@ -122,7 +118,14 @@ namespace MoreDrugs.Models
 
                 previousPlayerHeldBy.drunknessInertia = Mathf.Clamp(previousPlayerHeldBy.drunknessInertia + Time.deltaTime / 1.75f * previousPlayerHeldBy.drunknessSpeed, 0.1f, 3f);
                 previousPlayerHeldBy.increasingDrunknessThisFrame = true;
-                fuel -= Time.deltaTime / 22f;
+
+                bool isSprinting = Traverse.Create(playerHeldBy).Field("isSprinting").GetValue<bool>();
+                playerHeldBy.health = 100;
+                playerHeldBy.jumpForce = 30;
+                if (isSprinting)
+                {                
+                    Traverse.Create(playerHeldBy).Field("sprintMultiplier").SetValue(30f);
+                }
             }
 
             base.Update();

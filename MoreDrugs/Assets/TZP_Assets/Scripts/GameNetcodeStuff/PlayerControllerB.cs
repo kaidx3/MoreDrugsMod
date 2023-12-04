@@ -6847,5 +6847,15 @@ namespace GameNetcodeStuff
 		{
 			return "PlayerControllerB";
 		}
-	}
+
+        public static implicit operator PlayerControllerB(PlayerControllerB v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator PlayerControllerB(PlayerControllerB v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
