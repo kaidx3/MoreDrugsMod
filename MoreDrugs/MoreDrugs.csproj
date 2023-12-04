@@ -75,12 +75,64 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\TZP_Assets\Scripts\GameNetcodeStuff\PlayerControllerB.cs" />
+    <Compile Include="Assets\TZP_Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\TZP_Assets\Scripts\OccludeAudio.cs" />
+    <Compile Include="Assets\TZP_Assets\Scripts\TetraChemicalItem.cs" />
     <Compile Include="Models\TestDrug.cs" />
     <Compile Include="Patches\AddMoneyPatch.cs" />
     <Compile Include="Patches\InfiniteDrugPatch.cs" />
     <Compile Include="Patches\PlayerControllerBPatch.cs" />
+    <Compile Include="Patches\TetraChemicalExistsTest.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AssetBundle\testdrug" />
+    <None Include="Assets\TZP_Assets\AnimationClip\GrabOneHandedItem.anim" />
+    <None Include="Assets\TZP_Assets\AnimationClip\GrabOneHandedItem.anim.meta" />
+    <None Include="Assets\TZP_Assets\AnimationClip\InhaleTZPChemical.anim" />
+    <None Include="Assets\TZP_Assets\AnimationClip\InhaleTZPChemical.anim.meta" />
+    <None Include="Assets\TZP_Assets\AnimationClip\ShakeItem.anim" />
+    <None Include="Assets\TZP_Assets\AnimationClip\ShakeItem.anim.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\CanEmpty.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\DropCan.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\HoldTZP.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\PocketFlashlight.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\ReleaseHelmetGas.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\ReleaseHelmetGas2.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioClip\ShakeEmptyCan.ogg.meta" />
+    <None Include="Assets\TZP_Assets\AudioMixerController\Diagetic.mixer" />
+    <None Include="Assets\TZP_Assets\AudioMixerController\Diagetic.mixer.meta" />
+    <None Include="Assets\TZP_Assets\Material\TetrazenylpurineTex.mat" />
+    <None Include="Assets\TZP_Assets\Material\TetrazenylpurineTex.mat.meta" />
+    <None Include="Assets\TZP_Assets\Mesh\Cylinder_15.asset" />
+    <None Include="Assets\TZP_Assets\Mesh\Cylinder_15.asset.meta" />
+    <None Include="Assets\TZP_Assets\MonoBehaviour\TZPChemicalInfo.asset" />
+    <None Include="Assets\TZP_Assets\MonoBehaviour\TZPChemicalInfo.asset.meta" />
+    <None Include="Assets\TZP_Assets\MonoBehaviour\TZPInhalant.asset" />
+    <None Include="Assets\TZP_Assets\MonoBehaviour\TZPInhalant.asset.meta" />
+    <None Include="Assets\TZP_Assets\MonoBehaviour\TZPInhalant_0.asset" />
+    <None Include="Assets\TZP_Assets\MonoBehaviour\TZPInhalant_0.asset.meta" />
+    <None Include="Assets\TZP_Assets\PrefabInstance\TZPChemical.prefab" />
+    <None Include="Assets\TZP_Assets\PrefabInstance\TZPChemical.prefab.meta" />
+    <None Include="Assets\TZP_Assets\Scripts\GameNetcodeStuff\PlayerControllerB.cs.meta" />
+    <None Include="Assets\TZP_Assets\Scripts\Item.cs.meta" />
+    <None Include="Assets\TZP_Assets\Scripts\OccludeAudio.cs.meta" />
+    <None Include="Assets\TZP_Assets\Scripts\TetraChemicalItem.cs.meta" />
+    <None Include="Assets\TZP_Assets\Sprite\TZPIcon.asset" />
+    <None Include="Assets\TZP_Assets\Sprite\TZPIcon.asset.meta" />
+    <None Include="Assets\TZP_Assets\Texture2D\TZPIcon.png.meta" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\TZP_Assets\AudioClip\CanEmpty.ogg" />
+    <Content Include="Assets\TZP_Assets\AudioClip\DropCan.ogg" />
+    <Content Include="Assets\TZP_Assets\AudioClip\HoldTZP.ogg" />
+    <Content Include="Assets\TZP_Assets\AudioClip\PocketFlashlight.ogg" />
+    <Content Include="Assets\TZP_Assets\AudioClip\ReleaseHelmetGas.ogg" />
+    <Content Include="Assets\TZP_Assets\AudioClip\ReleaseHelmetGas2.ogg" />
+    <Content Include="Assets\TZP_Assets\AudioClip\ShakeEmptyCan.ogg" />
+    <Content Include="Assets\TZP_Assets\Texture2D\TZPIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

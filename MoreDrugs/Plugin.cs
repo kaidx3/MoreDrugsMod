@@ -31,6 +31,8 @@ namespace MoreDrugs
 
         private static TestModBase Instance;
 
+        public static AssetBundle TestAssets;
+
         internal ManualLogSource mls;
 
         void Awake()
@@ -49,19 +51,51 @@ namespace MoreDrugs
                 harmony.PatchAll(typeof(PlayerControllerBPatch));
                 harmony.PatchAll(typeof(AddMoneyPatch));
                 harmony.PatchAll(typeof(InfiniteDrugPatch));
-                mls.LogInfo("Hello i am alive still");
-                var obj = GameObject.FindObjectOfType(typeof(TetraChemicalItem));
-                if (obj != null)
-                    mls.LogInfo("Found TetraChemicalItem: " + obj.ToString());
-                else
-                    mls.LogInfo("Could not find TetraChemicalItem.");
-                Item myItem = ScriptableObject.CreateInstance<Item>();
-                myItem.itemName = "TestDrug";
-                myItem.itemId = 0987654321;
-                myItem.spawnPrefab = (GameObject)obj;
-                myItem.spawnPrefab.AddComponent<TestDrug>();
-                LethalLib.Modules.Items.RegisterShopItem(myItem, 999);
-                LethalLib.Modules.NetworkPrefabs.RegisterNetworkPrefab(myItem.spawnPrefab);
+                harmony.PatchAll(typeof(TetraChemicalExistsTest));
+
+                if ((UnityEngine.Object)TestModBase.Instance == (UnityEngine.Object)null)
+                    TestModBase.Instance = this;
+                Debug.Log(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
+                try
+                {
+                    TestModBase.TestAssets = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "testdrug"));
+                }
+                catch (Exception ex)
+                {
+                    mls.LogError("Exception thrown at TestAssets assignment");
+                    mls.LogError(ex.Message);
+                }
+
+                harmony.PatchAll(typeof(TestModBase));
+                harmony.PatchAll(typeof(PlayerControllerBPatch));
+                harmony.PatchAll(typeof(AddMoneyPatch));
+                harmony.PatchAll(typeof(InfiniteDrugPatch));
+                harmony.PatchAll(typeof(TetraChemicalExistsTest));
+
+                try
+                {
+                    var assetNames = TestModBase.TestAssets.GetAllAssetNames();
+                    foreach (var assetName in assetNames)
+                    {
+                        mls.LogInfo(assetName);
+                    }
+                    Item obj = TestModBase.TestAssets.LoadAsset<Item>("assets/testdrug.asset");
+
+                    if ((UnityEngine.Object)obj == (UnityEngine.Object)null)
+                    {
+                        this.mls.LogError((object)"Failed to load TestDrug prefab.");
+                    }
+                    else
+                    {
+                        LethalLib.Modules.NetworkPrefabs.RegisterNetworkPrefab(obj.spawnPrefab);
+                        Items.RegisterShopItem(obj, 80);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    mls.LogError("Exception thrown at Item assignment");
+                    mls.LogError(ex.Message);
+                }
             }
             catch (Exception ex)
             {
