@@ -47,12 +47,6 @@ namespace MoreDrugs
                 mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
                 mls.LogInfo("The test mod has awakened.");
 
-                harmony.PatchAll(typeof(TestModBase));
-                harmony.PatchAll(typeof(PlayerControllerBPatch));
-                harmony.PatchAll(typeof(AddMoneyPatch));
-                harmony.PatchAll(typeof(InfiniteDrugPatch));
-                harmony.PatchAll(typeof(TetraChemicalExistsTest));
-
                 if ((UnityEngine.Object)TestModBase.Instance == (UnityEngine.Object)null)
                     TestModBase.Instance = this;
                 Debug.Log(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
@@ -70,7 +64,6 @@ namespace MoreDrugs
                 harmony.PatchAll(typeof(PlayerControllerBPatch));
                 harmony.PatchAll(typeof(AddMoneyPatch));
                 harmony.PatchAll(typeof(InfiniteDrugPatch));
-                harmony.PatchAll(typeof(TetraChemicalExistsTest));
 
                 try
                 {

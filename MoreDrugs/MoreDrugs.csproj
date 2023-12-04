@@ -79,7 +79,6 @@
     <Compile Include="Patches\AddMoneyPatch.cs" />
     <Compile Include="Patches\InfiniteDrugPatch.cs" />
     <Compile Include="Patches\PlayerControllerBPatch.cs" />
-    <Compile Include="Patches\TetraChemicalExistsTest.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

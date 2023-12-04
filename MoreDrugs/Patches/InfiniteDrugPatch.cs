@@ -15,6 +15,20 @@ namespace MoreDrugs.Patches
         [HarmonyPrefix]
         static void InfiniteGas(TetraChemicalItem __instance)
         {
+            if (__instance.playerHeldBy != null)
+            {
+                float drunkness = Traverse.Create(__instance.playerHeldBy).Field("drunkness").GetValue<float>();
+                if (drunkness > 0f)
+                {
+                    if (__instance.itemProperties.itemId == 123456789 && !__instance.isPocketed)
+                    {
+                        Traverse.Create(__instance.playerHeldBy).Field("sprintMultiplier").SetValue(15f);
+                        Traverse.Create(__instance.playerHeldBy).Field("jumpForce").SetValue(15f);
+                        Traverse.Create(__instance.playerHeldBy).Field("climbSpeed").SetValue(15f);
+                    }
+                }
+            }
+            
             Traverse.Create(__instance).Field("fuel").SetValue(1f);
         }
 
